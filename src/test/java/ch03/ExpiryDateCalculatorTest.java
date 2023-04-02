@@ -19,5 +19,14 @@ class ExpiryDateCalculatorTest {
 
         assertEquals(LocalDate.of(2019, 4, 1), expiryDate);
 
+        // 다른 납부일자 case 추가
+        LocalDate billingDate2 = LocalDate.of(2019, 5, 5);
+        int payAmount2 = 10_000;
+
+        ExpiryDateCalculator cal2 = new ExpiryDateCalculator();
+        LocalDate expiryDate2 = cal2.calculateExpiryDate(billingDate2, payAmount2);
+
+        assertEquals(LocalDate.of(2019, 6, 5), expiryDate2);
+
     }
 }
