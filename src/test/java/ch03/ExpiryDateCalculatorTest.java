@@ -17,6 +17,16 @@ class ExpiryDateCalculatorTest {
         assertExpiryDate(LocalDate.of(2019,5,5), 10_000, LocalDate.of(2019,6,5));
     }
 
+    @Test
+    void 특이한_case(){
+        // 31일 끝나는게 아니라 30이나 28로 달이 끝나는 경우
+        assertExpiryDate(LocalDate.of(2019,1,31), 10_000, LocalDate.of(2019,2,28));
+
+        assertExpiryDate(LocalDate.of(2019,5,31), 10_000, LocalDate.of(2019,6,30));
+
+        assertExpiryDate(LocalDate.of(2020,1,31), 10_000, LocalDate.of(2020,2,29));
+    }
+
     private void assertExpiryDate(LocalDate billingDate, int payAmount, LocalDate expectedExpiryDate){
         ExpiryDateCalculator expiryDateCalculator = new ExpiryDateCalculator();
         LocalDate realExpiryDate = expiryDateCalculator.calculateExpiryDate(billingDate, payAmount);
