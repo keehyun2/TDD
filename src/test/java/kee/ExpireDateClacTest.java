@@ -15,13 +15,16 @@ public class ExpireDateClacTest {
     @DisplayName("만료일자 계산 테스트")
     void exTest(){
         // 20190301 에 만원 납입시 20190401 이 만료일자
-        LocalDate result = wrapCalc("2019-03-01", "2019-03-01",10_000);
-        assertEquals(LocalDate.parse("2019-04-01"), result);
+        LocalDate case01 = wrapCalc("2019-03-01", "2019-03-01",10_000);
+        assertEquals(LocalDate.parse("2019-04-01"), case01);
 
-//        assertExpiryDate(new PayData.Builder()
-//                .setBillingDate(LocalDate.of(2019,5,5))
-//                .setPayAmount(10_000)
-//                .createPayData(), LocalDate.of(2019,6,5));
+        // 2019,5,5 에 1만원 입금시 2019,6,5 가 만료일자
+        LocalDate case02 = wrapCalc("2019-05-05", "2019-05-05",10_000);
+        assertEquals(LocalDate.parse("2019-06-05"), case02);
+
+        // 2019,5,5 에 10만원 입금시 2020,5,5 가 만료일자 (10만원 납입시 2개월 보너스)
+        LocalDate case03 = wrapCalc("2019-05-05", "2019-05-05",100_000);
+        assertEquals(LocalDate.parse("2020-05-05"), case03);
     }
 
     private LocalDate wrapCalc(String firstDate, String billDate, int amount){
