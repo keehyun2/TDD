@@ -1,5 +1,6 @@
 package ch03;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -8,8 +9,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ExpiryDateCalculatorTest {
 
+    @DisplayName("납부일자_납부금액_전달받아서_만료일자반환")
     @Test
-    void 납부일자_납부금액_전달받아서_만료일자반환(){
+    void test(){
         // 10_000 당 한달 연장
 
         assertExpiryDate(new PayData.Builder()
