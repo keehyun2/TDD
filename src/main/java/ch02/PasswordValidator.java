@@ -18,16 +18,28 @@ public class PasswordValidator {
         if(password.length() > 7) {
             passCount += 1;
         }
+        // 소문자로 바꿧을때 동일하면 대문자가 없음
         if(!password.equals(password.toLowerCase())){
             passCount += 1;
         }
-
+        if(isContainNum(password)){
+            passCount += 1;
+        }
         return switch (passCount) {
             case 0, 1 -> Strength.WEAK;
             case 2 -> Strength.NORMAL;
             case 3 -> Strength.STRONG;
             default -> null;
         };
+    }
+
+    private boolean isContainNum(String password){
+        for(char c : password.toCharArray()){
+            if(Character.isDigit(c)){
+                return true;
+            }
+        }
+        return false;
     }
 
 }

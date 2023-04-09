@@ -19,7 +19,9 @@ class PasswordValidatorTest {
         assertEquals(pv.checkStrength("1"), Strength.WEAK);
 
         // 길이만 8글자 weak
-        assertEquals(pv.checkStrength("asdfdg22"), Strength.WEAK);
+        assertEquals(pv.checkStrength("asdfdgvv"), Strength.WEAK);
+        // 8글자, 숫자포함 normal
+        assertEquals(pv.checkStrength("asdfdg4v"), Strength.NORMAL);
 
         // 대문자 포함 weak
         assertEquals(pv.checkStrength("A"), Strength.WEAK);
