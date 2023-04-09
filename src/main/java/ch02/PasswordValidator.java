@@ -4,7 +4,7 @@ public class PasswordValidator {
 
     /**
      * - 길이 8글자 이상
-     * - 0부터 9사이 숫자를 초함
+     * - 0부터 9사이 숫자를 포함
      * - 대문자 포함
      * 3개 규칙을 충족하면 암호는 강함
      * 2개 규칙을 충족하면 암호는 보통
@@ -12,13 +12,22 @@ public class PasswordValidator {
      * @param password 패스워드
      * @return 패스워드 강도
      */
-    public Strength pwStrength(String password){
-        return Strength.WEAK;
+    public Strength checkStrength(String password){
+        if(password == null) return Strength.WEAK;
+        int passCount = 0;
+        if(password.length() > 7) {
+            passCount += 1;
+        }
+        if(!password.equals(password.toLowerCase())){
+            passCount += 1;
+        }
+
+        return switch (passCount) {
+            case 0, 1 -> Strength.WEAK;
+            case 2 -> Strength.NORMAL;
+            case 3 -> Strength.STRONG;
+            default -> null;
+        };
     }
 
-    public enum Strength {
-        WEAK,
-        NORMAL,
-        STRONG
-    }
 }
