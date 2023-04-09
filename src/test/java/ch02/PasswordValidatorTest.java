@@ -13,6 +13,7 @@ class PasswordValidatorTest {
         PasswordValidator pv = new PasswordValidator();
 
         // 빈문자열 weak
+        assertEquals(pv.checkStrength(null), Strength.WEAK);
         assertEquals(pv.checkStrength(""), Strength.WEAK);
 
         // 숫자만 포함, weak
@@ -29,5 +30,8 @@ class PasswordValidatorTest {
         // 1234567A  - 8글자, 숫자, 대문자포함 strong
         assertEquals(pv.checkStrength("1234567A"), Strength.STRONG);
 
+        assertEquals(pv.checkStrength("BmUfiFiV"), Strength.NORMAL);
+
+        assertEquals(pv.checkStrength("SN6ZuPVq"), Strength.STRONG);
     }
 }
