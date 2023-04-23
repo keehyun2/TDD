@@ -1,6 +1,5 @@
 package kee;
 
-import ch03.PayData;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -28,7 +27,7 @@ public class ExpireDateClacTest {
     }
 
     private LocalDate wrapCalc(String firstDate, String billDate, int amount){
-        ExpireDateCalc expireDateCalc = new ExpireDateCalc();
+        ExpiryDate expireDateCalc = new ExpiryDate();
         return expireDateCalc.calc(LocalDate.parse(firstDate), LocalDate.parse(billDate), amount);
     }
 }

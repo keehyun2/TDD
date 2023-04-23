@@ -3,9 +3,9 @@ package ch03;
 import java.time.LocalDate;
 
 public class PayData {
-    private LocalDate billingDate;
-    private LocalDate firstBillingDate;
-    private int payAmount;
+    private final LocalDate billingDate;
+    private final LocalDate firstBillingDate;
+    private final int payAmount;
 
     public PayData(LocalDate firstBillingDate, LocalDate billingDate, int payAmount) {
         this.firstBillingDate = firstBillingDate;
