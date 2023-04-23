@@ -17,17 +17,16 @@ public class ExpiryDate {
      * @return 만료일자
      */
     public LocalDate calc(LocalDate lastExpiryDAte, LocalDate billDate, int amount){
-        LocalDate base;
+        LocalDate base; // 기준일자
         if(lastExpiryDAte.isAfter(billDate)){ // 만료일자가 납부일자 뒤인 경우
-            base = lastExpiryDAte;
+            base = lastExpiryDAte;  // 기준일자를 지난 만료일자를 사용
         } else {
-            base = billDate;
+            base = billDate; // 기준일자를 납부일자를 사용
         }
 
-        if(amount == 10_000){
-            return base.plusMonths(1);
-        }
-        return billDate;
-//        return LocalDate.parse("2019-04-01");
+        int extendedMonths;
+        extendedMonths = amount / 10_000; // 만원당 1개월
+        extendedMonths += (amount / 100_000) * 2; // 추가 개월 (납부금액 / 10만원) * 2
+        return base.plusMonths(extendedMonths);
     }
 }

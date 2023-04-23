@@ -24,10 +24,22 @@ public class ExpireDateClacTest {
         // 2019,5,5 에 10만원 입금시 2020,5,5 가 만료일자 (10만원 납입시 2개월 보너스)
         LocalDate case03 = wrapCalc("2019-05-05", "2019-05-05",100_000);
         assertEquals(LocalDate.parse("2020-05-05"), case03);
+
+        // 31일 10만원
+        LocalDate case04 = wrapCalc("2020-01-31", "2019-05-05",100_000);
+        assertEquals(LocalDate.parse("2021-01-31"), case04);
+
+        // 31일 9만원
+        LocalDate case05 = wrapCalc("2020-01-31", "2019-05-05",90_000);
+        assertEquals(LocalDate.parse("2020-10-31"), case05);
+
+        // 31일 8만원
+        LocalDate case06 = wrapCalc("2020-01-31", "2019-05-05",80_000);
+        assertEquals(LocalDate.parse("2020-09-30"), case06);
     }
 
-    private LocalDate wrapCalc(String firstDate, String billDate, int amount){
+    private LocalDate wrapCalc(String lastExpiryDate, String billDate, int amount){
         ExpiryDate expireDateCalc = new ExpiryDate();
-        return expireDateCalc.calc(LocalDate.parse(firstDate), LocalDate.parse(billDate), amount);
+        return expireDateCalc.calc(LocalDate.parse(lastExpiryDate), LocalDate.parse(billDate), amount);
     }
 }
